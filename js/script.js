@@ -30,15 +30,18 @@ const submitContact = (event) => {
  let contact = Object.fromEntries(new FormData(contactForm));
  
  let result = validateData(contact);
+
+ event.preventDefault();
+
  return result;
  
 }
  
  const validateData = (contact) => {
-console.log(contact);
  //errors object captures all the validation errors
  let error = {
      firstNameError: validateFirstname(contact.firstname, 'FirstName'),
+     lastNameError: validateLastname(contact.lastname, 'LastName'),
      emailError: validateEmail(contact.email),
      homeNoError: validateHomeNo(contact.homeNo),
      workNoError:validateWorkNo(contact.workNo),
@@ -56,20 +59,24 @@ console.log(contact);
  //display validation summary with error messages
      displayValidationSummary(errorMessages);
  //display error messages alongside input fields
-     displayIndividualErrorMessages(errorMessages);
+    displayIndividualErrorMessages(error);
      return false;
  }
 
  //contacts can be logged on to console, or can even be updated on UI
- console.log(contacts);
+ //console.log(contacts);
 }
 
 
 
 //function to display validation summary with error messages provided
 function displayValidationSummary(error) {
-    let list = error.map(e => `<li>${e}</li>`).join('');
+   let list = error.map(e => `<li>${e}</li>`).join('');
     document.getElementsByTagName('ul')[0].innerHTML = list;
+    /*document.getElementsByTagName('ul')[0].innerHTML = errorMessages
+    .map(e => `<li>${e}</li>`)
+    .join('');*/
+    
 }
 
 //function to display error messages alongside the input fields
@@ -87,6 +94,12 @@ const validateFirstname = (firstName) => {
 }
 //function to validate lastName
 const isEmpty = value => value === '' || value === undefined || value === null;
+
+const validateLastname = (lastName) => {
+    let validRegex = "^[a-zA-Z]";
+    let lastNameError = validateInput(lastName,"LastName");
+    return lastNameError !== '' ? lastNameError : !lastName.match(validRegex) ? "LastName can contain only alphabets and (.)" : '';    
+}
 
 const validateInput = (value, fieldName) => isEmpty(value) ? `${fieldName} cannot be left blank` : '';
 
@@ -123,4 +136,4 @@ const setMaxDate = element => {
     element !== null ? element.setAttribute('max', new Date().toISOString().split('T')[0]) : element;
 }
 
-module.exports = submitContact
+//module.exports = submitContact
