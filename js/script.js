@@ -88,39 +88,39 @@ function displayIndividualErrorMessages(error) {
 }
 //function to validate firstName
 const validateFirstname = (firstName) => {
-    let validRegex = "^[a-zA-Z]";
+    let validRegex = /^[a-zA-Z,.]+$/;
     let firstNameError = validateInput(firstName,"FirstName");
     return firstNameError !== '' ? firstNameError : !firstName.match(validRegex) ? "FirstName can contain only alphabets and (.)" : '';    
 }
 //function to validate lastName
-const isEmpty = value => value === '' || value === undefined || value === null;
-
 const validateLastname = (lastName) => {
-    let validRegex = "^[a-zA-Z]";
-    let lastNameError = validateInput(lastName,"LastName");
-    return lastNameError !== '' ? lastNameError : !lastName.match(validRegex) ? "LastName can contain only alphabets and (.)" : '';    
+    let validRegex = /^[a-zA-Z,.]*$/;
+    let lastNameError = !lastName.match(validRegex) ? "LastName can contain only alphabets and (.)" : '';  
+    return lastNameError; 
 }
 
+
+const isEmpty = value => value === '' || value === undefined || value === null;
 const validateInput = (value, fieldName) => isEmpty(value) ? `${fieldName} cannot be left blank` : '';
+
 
 //function to validate email
 const validateEmail = (email) => {
-    let validRegex = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$";
+    let validRegex = /^[a-zA-Z0-9#$'_`~-]+@[a-z]+\.[a-z]+$/;
     let emailError = validateInput(email,"Email");
     return emailError !== '' ? emailError : !email.match(validRegex) ? "Invalid Email" : '';    
 }
 //function to validate home no
 const validateHomeNo = (HomeNo) => {
-	//let validRegex = /^\+?([0-9]{2})\)?[-. ]?([0-9]{3})?[-. ]?([0-9]{3})?[-. ]?([0-9]{4})$/;
-    let validRegex = /^\+(\d{2})[-. ]?\(?(\d{3})|(\d{4})\)?[-. ]?(\d{3})[-. ]?(\d{4})$/;
+    let validRegex = /^[+]\d{2}[(, ]*\d{3}[), ,.,-]*\d{3}[-, ,.]*\d{4}$/;
 	let homeNoError = validateInput(HomeNo,"Home No");
 	return homeNoError !== '' ? homeNoError : !HomeNo.match(validRegex) ? 'Home Contact No should start with country code prefixed by + and followed by 10 digits' : '';
 }
 //function to validate work no
 const validateWorkNo = (WorkNo) => {
-	let validRegex = /^\+(\d{2})[-. ]?\(?(\d{3})|(\d{4})\)?[-. ]?(\d{3})[-. ]?(\d{4})$/;
-	
-	return workNoError !== !WorkNo.match(validRegex) ? 'Work Contact No should start with country code prefixed by + and followed by 10 digits' : '';
+	let validRegex = /^[+]\d{2}[(, ]*\d{3}[), ,.,-]*\d{3}[-, ,.]*\d{4}$/;
+	let workNoError = ( WorkNo !== '' && !WorkNo.match(validRegex) ) ? 'Work Contact No should start with country code prefixed by + and followed by 10 digits' : '';
+    return workNoError;
 }
 //function to validate additional contact no
 
@@ -128,8 +128,8 @@ const validateWorkNo = (WorkNo) => {
 
 //function to validate notes
 const validateNotes = (notes) => {
-    let notesError = validateInput(notes, 'Notes');
-    return notesError !== '' ? notesError : notes.length > 200 ? "Notes should contain maximum of 200 characters" : '';
+    let notesError = notes.length > 200 ? "Notes should contain maximum of 200 characters" : '';
+    return notesError;
 }
 //disable all dates for whom age is less than 18
 const setMaxDate = element => {
