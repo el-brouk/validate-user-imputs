@@ -45,6 +45,9 @@ const submitContact = (event) => {
      emailError: validateEmail(contact.email),
      homeNoError: validateHomeNo(contact.homeNo),
      workNoError:validateWorkNo(contact.workNo),
+     birthdateError: "",
+     companyError: "",
+     jobTitleError: "", 
      notesError: validateNotes(contact.notes),
  }
 
@@ -131,9 +134,12 @@ const validateNotes = (notes) => {
     let notesError = notes.length > 200 ? "Notes should contain maximum of 200 characters" : '';
     return notesError;
 }
+
 //disable all dates for whom age is less than 18
 const setMaxDate = element => {
-    element !== null ? element.setAttribute('max', new Date().toISOString().split('T')[0]) : element;
+    let date = new Date();
+    date.setFullYear(date.getFullYear() - 18);
+    element.max = date.toISOString().split("T")[0];
 }
 
 //module.exports = submitContact
