@@ -4,22 +4,39 @@ let contacts = [];
 
 
 function init() {
-    // listen to click of addContact button and add maximum of two additional inputs for inputting Contact Nos.
    
+    // listen to click of addContact button and add maximum of two additional inputs for inputting Contact Nos.
    document.getElementById('addContactNo').addEventListener('click', createContact) 
+    let count = 1;
     function createContact () {
-        let div = document.createElement('div');
-        div.classList.add('col-md-6');
-        //input.class = "form-control form-control-sm";
-        let input = document.createElement('input');
-        input.classList.add('form-control');
-        input.name = "addContact";
-        div.appendChild(input);
-        let element = document.getElementById('contactNos');
-        element.appendChild(div);
-    }
+        if (count < 3 ) {
+            let div = document.createElement('div');
+            div.classList.add('col-md-6');
+            //input.class = "form-control form-control-sm";
+            let input = document.createElement('input');
+            input.classList.add('form-control');
+            input.name = `addContact${count}`;
+            input.id = `addContact${count}`;
+            div.appendChild(input);
+            let small = document.createElement('small');
+            small.id = `addContactError${count}`;
+            div.appendChild(small);
+            let element = document.getElementById('contactNos');
+            element.appendChild(div);
+            count ++;
+        } else {
+         return
+    }};
+    
     //disable all dates for whom age is less than 18
     setMaxDate(document.getElementById('birthdate'));
+
+    //fix + button
+    let btn = document.getElementById('addContactNo');
+    btn.addEventListener('click', event => {
+       // event.stopPropagation();
+       event.preventDefault();
+    });
 
 }
 
@@ -44,7 +61,11 @@ const submitContact = (event) => {
      lastNameError: validateLastname(contact.lastname, 'LastName'),
      emailError: validateEmail(contact.email),
      homeNoError: validateHomeNo(contact.homeNo),
-     workNoError:validateWorkNo(contact.workNo),
+     workNoError: validateWorkNo(contact.workNo),
+     addContactError1: validateContactNo1(contact.addContact1),
+     //addContactError1: "",
+     //addContactError2: validateContactNo2(contact.addContact2),
+     addContactError2: "",
      birthdateError: "",
      companyError: "",
      jobTitleError: "", 
@@ -126,8 +147,17 @@ const validateWorkNo = (WorkNo) => {
     return workNoError;
 }
 //function to validate additional contact no
-
+const validateContactNo1 = (ContactNo1) => {
+    let validRegex = /^[+]\d{2}[(, ]*\d{3}[), ,.,-]*\d{3}[-, ,.]*\d{4}$/;
+    let addContactError1 = ( ContactNo1 !== '' && !ContactNo1.match(validRegex) ) ? 'Contact No should start with country code prefixed by + and followed by 10 digits' : '';
+    return addContactError1;
+}
 //function to validate additional contact no
+const validateContactNo2 = (ContactNo2) => {
+    let validRegex = /^[+]\d{2}[(, ]*\d{3}[), ,.,-]*\d{3}[-, ,.]*\d{4}$/;
+    let addContactError2 = ( ContactNo2 !== '' && !ContactNo2.match(validRegex) ) ? 'Contact No should start with country code prefixed by + and followed by 10 digits' : '';
+    return addContactError2;
+}
 
 //function to validate notes
 const validateNotes = (notes) => {
