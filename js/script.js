@@ -34,7 +34,6 @@ function init() {
     //fix + button
     let btn = document.getElementById('addContactNo');
     btn.addEventListener('click', event => {
-       // event.stopPropagation();
        event.preventDefault();
     });
 
@@ -63,9 +62,7 @@ const submitContact = (event) => {
      homeNoError: validateHomeNo(contact.homeNo),
      workNoError: validateWorkNo(contact.workNo),
      addContactError1: validateContactNo1(contact.addContact1),
-     //addContactError1: "",
-     //addContactError2: validateContactNo2(contact.addContact2),
-     addContactError2: "",
+     addContactError2: validateContactNo2(contact.addContact2),
      birthdateError: "",
      companyError: "",
      jobTitleError: "", 
@@ -157,6 +154,7 @@ const validateContactNo2 = (ContactNo2) => {
     let validRegex = /^[+]\d{2}[(, ]*\d{3}[), ,.,-]*\d{3}[-, ,.]*\d{4}$/;
     let addContactError2 = ( ContactNo2 !== '' && !ContactNo2.match(validRegex) ) ? 'Contact No should start with country code prefixed by + and followed by 10 digits' : '';
     return addContactError2;
+
 }
 
 //function to validate notes
