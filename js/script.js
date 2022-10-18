@@ -61,19 +61,26 @@ const submitContact = (event) => {
      emailError: validateEmail(contact.email),
      homeNoError: validateHomeNo(contact.homeNo),
      workNoError: validateWorkNo(contact.workNo),
-     addContactError1: validateContactNo1(contact.addContact1),
-     addContactError2: validateContactNo2(contact.addContact2),
      birthdateError: "",
      companyError: "",
      jobTitleError: "", 
      notesError: validateNotes(contact.notes),
  }
 
+if (document.getElementById('addContact1')) {
+    error.addContactError1 = validateContactNo1(contact.addContact1);
+}
+
+if(document.getElementById('addContact2')){
+    error.addContactError2 = validateContactNo2(contact.addContact2);
+}
+
  //display validation summary with error messages
  //if no errors, push the contact to contacts array
  let errorMessages = Object.values(error).filter(e => e !== '');
  if (errorMessages.length === 0) {
      contacts.push(contact);
+     //sendContact(contact);
      alert('feedback submitted');
      return true;
     } else {
@@ -171,3 +178,15 @@ const setMaxDate = element => {
 }
 
 //module.exports = submitContact
+
+/*function sendContact(contact) {
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://localhost:3000/posts" );
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(contact));
+    xhr.onload = () => {
+        console.log('contact added');
+    };
+}*/
+
+
