@@ -80,7 +80,7 @@ if(document.getElementById('addContact2')){
  let errorMessages = Object.values(error).filter(e => e !== '');
  if (errorMessages.length === 0) {
      contacts.push(contact);
-     //sendContact(contact);
+     sendContact(contact);
      alert('feedback submitted');
      return true;
     } else {
@@ -134,7 +134,7 @@ const validateInput = (value, fieldName) => isEmpty(value) ? `${fieldName} canno
 
 //function to validate email
 const validateEmail = (email) => {
-    let validRegex = /^[a-zA-Z0-9#$'_`~-]+@[a-z]+\.[a-z]+$/;
+    let validRegex = /^[a-zA-Z0-9#$.'_`~-]+@[a-z]+\.[a-z]+$/;
     let emailError = validateInput(email,"Email");
     return emailError !== '' ? emailError : !email.match(validRegex) ? "Invalid Email" : '';    
 }
@@ -179,14 +179,24 @@ const setMaxDate = element => {
 
 //module.exports = submitContact
 
-/*function sendContact(contact) {
+function sendContact(contact) {
     let xhr = new XMLHttpRequest();
+    
     xhr.open("POST", "http://localhost:3000/posts" );
+    
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(contact));
+    /*xhr.onreadyStateChange = function() {
+        if (this.readyState == 4 && this.status == 201) {
+            console.log ('data added succcessfully');
+        }
+    };*/
     xhr.onload = () => {
-        console.log('contact added');
+        console.log(`Loaded: ${xhr.status} ${xhr.response}`);
     };
-}*/
+    xhr.onerror = function() {
+    console.log(`Network error: ${xhr.status}`);
+};
+}
 
 

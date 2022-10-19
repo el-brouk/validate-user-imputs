@@ -1,0 +1,91 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    },
+    {
+      "firstname": "liz",
+      "lastname": "",
+      "email": "liz@mail.com",
+      "homeNo": "+999999999999",
+      "workNo": "",
+      "birthdate": "",
+      "company": "",
+      "jobTitle": "",
+      "notes": "",
+      "id": 2
+    },
+    {
+      "firstname": "lij",
+      "lastname": "",
+      "email": "lexbruk@gmail.com",
+      "homeNo": "+999999999999",
+      "workNo": "",
+      "birthdate": "",
+      "company": "",
+      "jobTitle": "",
+      "notes": "",
+      "id": 3
+    },
+    {
+      "firstname": "liz",
+      "lastname": "",
+      "email": "liz@mail.com",
+      "homeNo": "+000000000000",
+      "workNo": "",
+      "birthdate": "",
+      "company": "",
+      "jobTitle": "",
+      "notes": "",
+      "id": 4
+    },
+    {
+      "firstname": "lz",
+      "lastname": "",
+      "email": "liz@mai.com",
+      "homeNo": "+000000000000",
+      "workNo": "",
+      "birthdate": "",
+      "company": "",
+      "jobTitle": "",
+      "notes": "",
+      "id": 5
+    },
+    {
+      "firstname": "lij",
+      "lastname": "",
+      "email": "lizavetka@gmail.com",
+      "homeNo": "+999999999999",
+      "workNo": "",
+      "birthdate": "",
+      "company": "",
+      "jobTitle": "",
+      "notes": "",
+      "id": 6
+    },
+    {
+      "firstname": "lij",
+      "lastname": "",
+      "email": "lizavetka.b@gmail.com",
+      "homeNo": "+999999999999",
+      "workNo": "",
+      "birthdate": "",
+      "company": "",
+      "jobTitle": "",
+      "notes": "",
+      "id": 7
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
